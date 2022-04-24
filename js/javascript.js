@@ -1,3 +1,16 @@
+// playerSelection is case sensitive
+// users can input rock, ROCK, Rock or any variation
+function playerPlay(){
+    
+    let playerSelection;
+    while (playerSelection != 'Rock' && playerSelection != 'Paper' && playerSelection != 'Scissors' ) {
+        playerSelection = prompt('Enter your selection').toLowerCase();
+        playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);        
+    }    
+    return playerSelection;
+
+}
+
 // create function computerPlay
 // computerPlay randomly returns 'Rock', 'Paper' or 'Scissors'
 
@@ -16,7 +29,6 @@ function computerPlay(){
     }
 }
 
-
 // create function playRound (playerSelection, computerSelection)
 function playRound (playerSelection, computerSelection){
 // playRound plays one round
@@ -24,7 +36,13 @@ function playRound (playerSelection, computerSelection){
 // eg. "You lose! Paper beats Rock"
 
     console.log('Player Selection: ' + playerSelection);
+    const playerPlay = document.querySelector('#player-play');
+    playerPlay.textContent = "Player selection: " + playerSelection;
+
     console.log('Computer Selection: ' + computerSelection);
+    const computerPlay = document.querySelector('#computer-play');
+    computerPlay.textContent = "Computer selection: " + computerSelection;
+
     if (playerSelection == computerSelection) {
         return 'It is a tie! ' + playerSelection + ' equals ' + computerSelection; 
      } else {
@@ -60,20 +78,6 @@ function playRound (playerSelection, computerSelection){
     }
 }
 
-// playerSelection is case sensitive
-// users can input rock, ROCK, Rock or any variation
-function playerPlay(){
-    
-    let playerSelection;
-    while (playerSelection != 'Rock' && playerSelection != 'Paper' && playerSelection != 'Scissors' ) {
-        playerSelection = prompt('Enter your selection').toLowerCase();
-        playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);        
-    }    
-    return playerSelection;
-
-}
-
-
 // create function Game
 // call the playRound function inside, 
 function game(){
@@ -83,7 +87,7 @@ function game(){
        
         result = playRound(playerPlay(), computerPlay());
         console.log(result);
-    
+   
     }
 
     // and report a winner or loser at the end
@@ -101,5 +105,57 @@ function game(){
 
 let playerCount = 0;
 let computerCount = 0;
-game();
 
+// Create three buttons, one for each selection.
+// Add an event listener to the buttons that call your playRound function 
+// with the correct playerSelection every time a button is clicked.
+
+const rock = document.getElementById('rock');
+rock.addEventListener('click', () => {
+    // alert(rock.id);
+    roundResult = playRound('Rock', computerPlay());
+    showGameInfo();
+});
+
+const paper = document.getElementById('paper');
+paper.addEventListener('click', () => {
+    // alert(paper.id);
+    roundResult = playRound('Paper', computerPlay());
+    showGameInfo();
+});
+
+const scissors = document.getElementById('scissors');
+scissors.addEventListener('click', () => {
+    // alert(scissors.id);
+    roundResult = playRound('Scissors', computerPlay());
+    showGameInfo();
+});
+
+// Display the running score, and announce a winner of the game
+// once one player reaches 5 points.
+function showGameInfo(){
+
+    const matchResultContainer = document.querySelector('#match-result');
+    matchResultContainer.textContent = ""; 
+
+    const roundResultContainer = document.querySelector('#round-result');
+    roundResultContainer.textContent = "Round result: " + roundResult;
+
+    const playerScoreContainer = document.querySelector('#player-score');
+    playerScoreContainer.textContent = "Player score: " + playerCount;
+
+    const computerScoreContainer = document.querySelector('#computer-score');
+    computerScoreContainer.textContent = "Computer score: " + computerCount;
+
+    if(computerCount >= 5){
+        const matchResultContainer = document.querySelector('#match-result');
+        matchResultContainer.textContent = "Computer wins!";
+        playerCount = 0;
+        computerCount = 0;
+    }
+    if(playerCount >= 5){
+        matchResultContainer.textContent = "Player wins!";
+        playerCount = 0;
+        computerCount = 0;    
+    }
+}

@@ -5,11 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src="js/javascript.js"></script>
-
 </head>
 <body>
     <h1>Rock Paper Scissors</h1>
-    
+
+    <div id="score-board">
+        <div id="player-score"></div>
+        <div id="round-result"></div>
+        <div id="computer-score"></div>
+    </div>
+
+    <div class="container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div class="container-plays">
+        <div id="player-play"></div>
+        <div id="match-result"></div>
+        <div id="computer-play"></div>
+    </div>
+
+
+
 </body>
+<script src="js/javascript.js"></script>
+<style>
+    body { 
+        margin: 0 40px;
+    }
+    h1 { 
+        text-align: center;
+        margin:40px 0 20px 0;
+    }
+    button { 
+        font-size: 30px;
+        padding: 6px 20px;
+    }
+    .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin:40px 0;
+    }
+    #round-result, #match-result {
+        text-align: center;
+    }
+
+    #score-board {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+    }
+    .container-plays {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 20px;
+    }
+
+    #match-result { 
+        font-size: 30px;
+        color: blue;
+    }
+
+
+</style>
 </html>
